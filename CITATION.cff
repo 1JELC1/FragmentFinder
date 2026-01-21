@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "López-Cervantes"
+  given-names: "Juan Emanuel"
+  orcid: "https://orcid.org/0009-0001-5428-6337"
+  affiliation: "Universidad Autónoma del Estado de Hidalgo"
+title: "FragmentFinder: A 3D Substructure Matching Tool for Computational Chemistry"
+version: 1.0.0
+date-released: 2026-01-18
+url: "https://github.com/1JELC1/FragmentFinder"
+keywords:
+  - cheminformatics
+  - fragment-matching
+  - substructure-search
+  - graph-isomorphism
+  - molecular-visualization
+  - python
+  - computational-chemistry
+  - vedo
+  - networkx
+abstract: "FragmentFinder is a Python tool designed to identify and extract common molecular fragments across a dataset of molecules. It utilizes 3D visualization for interactive selection and graph isomorphism algorithms to find topological matches, enabling targeted local property analysis in computational chemistry workflows."
+license: Apache-2.0
