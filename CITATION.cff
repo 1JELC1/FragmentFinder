@@ -1,5 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
+type: software
 authors:
 - family-names: "López-Cervantes"
   given-names: "Juan Emanuel"
@@ -22,3 +23,13 @@ keywords:
   - networkx
 abstract: "FragmentFinder is a Python tool designed to identify and extract common molecular fragments across a dataset of molecules. It utilizes 3D visualization for interactive selection and graph isomorphism algorithms to find topological matches, enabling targeted local property analysis in computational chemistry workflows."
 license: Apache-2.0
+preferred-citation:
+  type: software
+  authors:
+  - family-names: "López-Cervantes"
+    given-names: "Juan Emanuel"
+    orcid: "https://orcid.org/0009-0001-5428-6337"
+  title: "FragmentFinder: A 3D Substructure Matching Tool for Computational Chemistry"
+  version: 1.0.0
+  doi: "10.5281/zenodo.18844141"
+  year: 2026
