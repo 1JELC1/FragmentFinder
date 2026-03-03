@@ -2,6 +2,8 @@
 
 ![FragmentFinder Logo](images/Ff_logo.png)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18844141.svg)](https://doi.org/10.5281/zenodo.18844141)
+
 A standalone Python tool for **interactive 3D identification** and **search of common molecular fragments** across a dataset using graph isomorphism algorithms.
 
 ## Overview

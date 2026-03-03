@@ -8,6 +8,7 @@ authors:
 title: "FragmentFinder: A 3D Substructure Matching Tool for Computational Chemistry"
 version: 1.0.0
 date-released: 2026-01-18
+doi: "10.5281/zenodo.18844141"
 url: "https://github.com/1JELC1/FragmentFinder"
 keywords:
   - cheminformatics
