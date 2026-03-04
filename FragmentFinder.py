@@ -14,6 +14,7 @@ The workflow broadly consists of:
 """
 
 import os
+import csv
 from pathlib import Path
 import numpy as np
 import networkx as nx
@@ -582,6 +583,25 @@ def main(fragment_matrix: np.ndarray, fragment_symbols: list[str], directory: st
     return res, found, not_found
 
 
+def generate_csv_report(molecule_counts: dict, directory: str, filename: str = "fragment_counts.csv"):
+    """
+    Generate a CSV report listing all processed molecules and the number of
+    times the fragment was found in each.
+    """
+    filepath = Path(directory) / filename
+    try:
+        with open(filepath, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Molecule", "Fragment_Count"])
+            
+            # Sort for better readability
+            for mol in sorted(molecule_counts.keys()):
+                writer.writerow([mol, molecule_counts[mol]])
+                
+        print(f"\n--> CSV report generated: {filepath.name}")
+    except Exception as e:
+        print(f"\nError writing CSV report: {e}")
+
 #############################################
 # Function start()
 #############################################
@@ -737,6 +757,15 @@ def start(file_path: str, specificity: str, req: str = 'all') -> tuple[dict, lis
     print(f"\nFragment found in {len(matched_files)} file(s).")
     if not_found:
         print("Not found in:", not_found)
+
+    # Prepare data for CSV export
+    molecule_counts = {}
+    for name in found + not_found:
+        molecule_counts[name] = 0
+    for name, _, _, _, _ in results:
+        molecule_counts[name] += 1
+
+    generate_csv_report(molecule_counts, str(directory))
 
     return results_dict, atoms_of_interest, neighbor_dict_interest
 
