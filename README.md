@@ -2,7 +2,7 @@
 
 ![FragmentFinder Logo](images/Ff_logo.png)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18844141.svg)](https://doi.org/10.5281/zenodo.18844141)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18844140.svg)](https://doi.org/10.5281/zenodo.18844140)
 
 A standalone Python tool for **interactive 3D identification** and **search of common molecular fragments** across a dataset using graph isomorphism algorithms.
 
@@ -19,6 +19,7 @@ It combines **interactive 3D selection** (using `vedo`) with **rigorous topologi
 *   **Graph Isomorphism Matching**: Uses graph theory to find topologically identical fragments in other molecules, independent of atom ordering.
 *   **Neighbor Environment Specificity**: Control how strict the matching should be regarding the environment.
 *   **Atom Mapping**: Returns the exact indices of the matching atoms in each target molecule.
+*   **Substituent Site Analysis** *(New in v2.0)*: Identifies and characterizes substituent branches at each fragment site, including topological layer decomposition (proximal L1–L3 and distal D1–D3) and internal bond detection.
 
 ## Methodology
 
@@ -47,6 +48,29 @@ You can control the strictness of the search using two levels:
         *   **Phenol**: No Match. (O has 2 neighbors [1C + 1H]) ❌
 
 ![Specificity Levels Diagram](images/specificity_levels_diagram.png)
+
+### 3. Substituent Site Analysis *(New in v2.0)*
+
+When `analyze_substituents=True`, FragmentFinder identifies the substituent branches attached to each atom of the matched fragment and computes topological layer information:
+
+**Branch Detection**:
+- For each fragment atom, external neighbors (atoms not in the fragment) are identified
+- A BFS traversal from each root atom builds connected components (branches)
+- Branches that connect to other fragment atoms are flagged (`touches_other_fragment_atoms`)
+
+**Proximal Layers (L1, L2, L3)**:
+- Cumulative topological layers expanding outward from the fragment atom
+- L1 = direct substituent neighbors, L2 = L1 $\cup$ distance 2, L3 = L2 $\cup$ distance 3
+
+**Distal Layers (D1, D2, D3)**:
+- The **distal region** is defined as the set of substituent atoms with the maximum topological distance to the fragment atom
+- A reverse multi-source BFS from the distal region propagates inward through the substituent subgraph
+- D1 = the distal tips, D2 = D1 $\cup$ distance $\le 1$ from tips, D3 = D2 $\cup$ distance $\le 2$
+- This approach naturally handles cyclic substituents, bridge-bonded systems, and asymmetric branching
+
+**Internal Bond Detection**:
+- All bonds between substituent atoms are extracted and stored for downstream BCP analysis
+- Anchor atoms (root atoms directly bonded to fragment atoms) are explicitly tracked
 
 ## Installation
 
